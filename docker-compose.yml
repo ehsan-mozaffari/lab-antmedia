@@ -13,16 +13,16 @@ networks: # defining user defined network adds DNS by name of the service resolv
 
 
 services:
-  # Ant Media Service  ------------------------------------------------------------------------------
+  # Ant Media Service  ####################
   ant-media-service:
-    image: "nibrev/ant-media-server:latest"
+    image: "nibrev/ant-media-server:ams-v2.5.3"
     container_name: "ant-media-container"
-    ports:
-      - "1935:1935"
-      - "5080:5080"
-      - "5443:5443"
+#    ports:
+#      - "1935:1935"
+#      - "5080:5080"
+#      - "5443:5443"
     volumes:
       - ant-media-volume:/usr/local/antmedia/ # persist data even if container shuts down
-    networks:
-      - bridge-network
+    network_mode: host # Just work in linux
+
 
