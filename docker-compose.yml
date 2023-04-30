@@ -18,6 +18,12 @@ services:
     image: "nibrev/ant-media-server:ams-v2.5.3"
     container_name: "ant-media-container"
     restart: always
+    # restart after enable ssl and use 5443 port to access <https://yourdomain:5443>
+    command:
+      - /bin/bash
+      - -c
+      - |
+        ./usr/local/antmedia/enable_ssl.sh <yourdomain>
     volumes:
       - ant-media-volume:/usr/local/antmedia/ # persist data even if container shuts down
     network_mode: host # Just work in linux. https://docs.docker.com/network/network-tutorial-host/#prerequisites The host networking driver only works on Linux hosts, and is not supported on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
