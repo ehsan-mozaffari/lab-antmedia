@@ -17,12 +17,9 @@ services:
   ant-media-service:
     image: "nibrev/ant-media-server:ams-v2.5.3"
     container_name: "ant-media-container"
-#    ports:
-#      - "1935:1935"
-#      - "5080:5080"
-#      - "5443:5443"
+    restart: always
     volumes:
       - ant-media-volume:/usr/local/antmedia/ # persist data even if container shuts down
-    network_mode: host # Just work in linux
+    network_mode: host # Just work in linux. https://docs.docker.com/network/network-tutorial-host/#prerequisites The host networking driver only works on Linux hosts, and is not supported on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
 
 
