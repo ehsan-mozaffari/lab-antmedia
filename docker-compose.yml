@@ -1,0 +1,28 @@
+version: '3.9'
+
+volumes: # named volumes can be managed easier using docker-compose
+  ant-media-volume:
+    external: false # docker expected to already exist if true
+
+networks: # defining user defined network adds DNS by name of the service resolver for your services
+  bridge-network:
+    driver: bridge
+  host-network: # Directly connected to host network and no need to expose ports. Useful for VPN: Wire guard or Kamailio
+    driver: host # driver means network type
+    external: false # docker expected to already exist if true
+
+
+services:
+  # Ant Media Service  ------------------------------------------------------------------------------
+  ant-media-service:
+    image: "nibrev/ant-media-server:latest"
+    container_name: "ant-media-container"
+    ports:
+      - "1935:1935"
+      - "5080:5080"
+      - "5443:5443"
+    volumes:
+      - ant-media-volume:/usr/local/antmedia/ # persist data even if container shuts down
+    networks:
+      - bridge-network
+
