@@ -27,3 +27,6 @@ services:
     # Ant media in Kubernetes
     # https://github.com/ant-media/Ant-Media-Server/wiki/Getting-Started-with-Ant-Media-Server-Kubernetes
     # Use this image for the kubernetes
+
+    # REST API
+    # https://antmedia.io/rest/
