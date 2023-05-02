@@ -4,13 +4,6 @@ volumes: # named volumes can be managed easier using docker-compose
   ant-media-volume:
     external: false # docker expected to already exist if true
 
-networks: # defining user defined network adds DNS by name of the service resolver for your services
-  bridge-network:
-    driver: bridge
-  host-network: # Directly connected to host network and no need to expose ports. Useful for VPN: Wire guard or Kamailio
-    driver: host # driver means network type
-    external: false # docker expected to already exist if true
-
 
 services:
   # Ant Media Service  ####################
@@ -26,6 +19,11 @@ services:
         ./usr/local/antmedia/enable_ssl.sh <yourdomain>
     volumes:
       - ant-media-volume:/usr/local/antmedia/ # persist data even if container shuts down
-    network_mode: host # Just work in linux. https://docs.docker.com/network/network-tutorial-host/#prerequisites The host networking driver only works on Linux hosts, and is not supported on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
+    network_mode: host # Because of the nat issue you have to use host mode
+    # above means that Ant Media Server uses the host network. It is required because
+    # there is a wide range of UDP and TCP ports are being used for WebRTC streaming.
+    #This also means that you can only use one pod of Ant Media Server in a host instance.
 
-
+    # Ant media in Kubernetes
+    # https://github.com/ant-media/Ant-Media-Server/wiki/Getting-Started-with-Ant-Media-Server-Kubernetes
+    # Use this image for the kubernetes
