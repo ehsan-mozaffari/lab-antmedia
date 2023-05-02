@@ -23,10 +23,3 @@ services:
     # above means that Ant Media Server uses the host network. It is required because
     # there is a wide range of UDP and TCP ports are being used for WebRTC streaming.
     #This also means that you can only use one pod of Ant Media Server in a host instance.
-
-    # Ant media in Kubernetes
-    # https://github.com/ant-media/Ant-Media-Server/wiki/Getting-Started-with-Ant-Media-Server-Kubernetes
-    # Use this image for the kubernetes
-
-    # REST API
-    # https://antmedia.io/rest/
